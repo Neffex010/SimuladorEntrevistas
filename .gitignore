@@ -1,6 +1,7 @@
 # Dependencias y cachés
 node_modules/
 .vercel/
+.netlify/
 
 # Sistemas operativos
 .DS_Store

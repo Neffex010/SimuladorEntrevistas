@@ -1,0 +1,14 @@
+# Configuración de despliegue en Netlify
+[build]
+  publish = "."
+  command = ""
+
+# Funciones serverless (Netlify Functions v1)
+[functions]
+  directory = "netlify/functions"
+
+# Compatibilidad con la ruta /api/feedback usada por el frontend
+[[redirects]]
+  from = "/api/feedback"
+  to = "/.netlify/functions/feedback"
+  status = 200

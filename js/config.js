@@ -91,9 +91,8 @@ export const APP_SETTINGS = {
   storageKey: 'datosAspirante',
   timeOptions: [30, 45, 60, 90, 120],
   defaultTime: 60,
-  // URL del backend en Netlify. Si creas el sitio en Netlify con otro nombre,
-  // cambia la subcadena del nombre (simulador-entrevistas).
-  apiPrimary: 'https://simulador-entrevistas.netlify.app/api/feedback',
+  // URL del backend en Netlify (función serverless).
+  apiPrimary: 'https://simuladorentre.netlify.app/api/feedback',
   // Fallback relativo: funciona cuando el sitio y la función viven en el mismo origen (Netlify).
   apiFallback: '/api/feedback',
   useQuestionSpeech: true,

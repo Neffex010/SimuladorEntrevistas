@@ -1,111 +1,110 @@
+// ---------- js/pdfReportGenerator.js ----------
+import { ROLES } from './config.js';
+
 export class PDFReportGenerator {
-  constructor(respuestas, datosAspirante, config, jsPDF) {
+  constructor(respuestas, datosAspirante, config) {
     this.respuestas = respuestas;
     this.d = datosAspirante;
     this.config = config;
-    this.jsPDF = jsPDF;
   }
 
-  async _loadImage(url) {
-    return new Promise(resolve => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.src = url;
-    });
-  }
+  generateAndSave() {
+    const { jsPDF } = window;
+    if (!jsPDF) return;
 
-  async generateAndSave() {
-    const doc = new this.jsPDF();
-    let y = 45;
+    const doc = new jsPDF();
     const margin = 20;
-    const width = doc.internal.pageSize.width - 2 * margin;
+    const pageW = doc.internal.pageSize.width;
+    const [r, g, b] = this.config.colores.header;
 
-    // Encabezado
-    const [logoLeft, logoRight] = await Promise.all([
-      this._loadImage(this.config.logos.izquierdo),
-      this._loadImage(this.config.logos.derecho)
-    ]);
-    doc.setFillColor(...this.config.colores.header);
-    doc.rect(0, 0, doc.internal.pageSize.width, 40, 'F');
-    doc.addImage(logoLeft, 'PNG', 10, 5, 30, 30);
-    doc.addImage(logoRight, 'PNG', doc.internal.pageSize.width - 40, 5, 30, 30);
+    // Cabecera
+    doc.setFillColor(r, g, b);
+    doc.rect(0, 0, pageW, 34, 'F');
+    doc.setFont('helvetica', 'bold');
     doc.setFontSize(this.config.fuentes.titulo);
-    doc.setFont("helvetica", "bold");
     doc.setTextColor(255, 255, 255);
-    doc.text("INFORME DE ENTREVISTA TÉCNICA", doc.internal.pageSize.width / 2, 25, null, "center");
+    doc.text('INFORME DE ENTREVISTA LABORAL', pageW / 2, 15, { align: 'center' });
+    doc.setFontSize(this.config.fuentes.etiqueta);
+    doc.setTextColor(210, 220, 230);
+    doc.text(`Generado el ${new Date().toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' })}`, pageW / 2, 24, { align: 'center' });
+
+    const rol = ROLES.find((item) => item.id === this.d.rol);
+    const rolLabel = rol ? rol.label : 'Perfil TIC general';
+
+    let y = 50;
+    const width = pageW - 2 * margin;
 
     const addSection = (title, content) => {
+      const ensure = () => {
+        if (y > 255) { doc.addPage(); y = 30; }
+      };
+      ensure();
+      doc.setFont('helvetica', 'bold');
       doc.setFontSize(this.config.fuentes.seccion);
-      doc.setFont("helvetica", "bold");
-      doc.setTextColor(...this.config.colores.titulo);
+      doc.setTextColor(...this.config.colores.acento);
       doc.text(title, margin, y);
-      y += 10;
-      doc.setDrawColor(...this.config.colores.titulo);
-      doc.line(margin, y, margin + 30, y);
-      y += 15;
+      y += 3;
+      doc.setDrawColor(...this.config.colores.acento);
+      doc.setLineWidth(0.5);
+      doc.line(margin, y, margin + 26, y);
+      y += 9;
+      doc.setFont('helvetica', 'normal');
       doc.setFontSize(this.config.fuentes.cuerpo);
-      doc.setFont("helvetica", "normal");
       doc.setTextColor(...this.config.colores.texto);
       const lines = doc.splitTextToSize(content, width);
-      lines.forEach(line => {
-        if (y > 260) { doc.addPage(); y = 40; }
+      lines.forEach((line) => {
+        ensure();
         doc.text(line, margin, y);
-        y += 7;
+        y += 6;
       });
-      y += 20;
+      y += 8;
     };
 
-    // Secciones
-    addSection("INFORMACIÓN DEL CANDIDATO",
-      `Nombre: ${this.d.nombre || "N/A"} ${this.d.apellidos || ""}\n` +
-      `Control: ${this.d.control || "N/A"}\n` +
-      `Contacto: ${this.d.correo || "N/A"} | ${this.d.telefono || "N/A"}`
+    // Datos del candidato
+    addSection('DATOS DEL CANDIDATO',
+      `Nombre: ${this.d.nombre || 'N/A'} ${this.d.apellidos || ''}\n` +
+      `Correo: ${this.d.correo || 'N/A'}\n` +
+      `Teléfono: ${this.d.telefono || 'N/A'}\n` +
+      `Área practicada: ${rolLabel || 'Perfil general'}\n` +
+      `Experiencia: ${this.d.experiencia || 'No indicada'}`
     );
 
-    const stats = {
-      total: this.respuestas.length,
-      tecnicas: this.respuestas.filter(r => r.modulo === 'tecnicas').length,
-      blandas: this.respuestas.filter(r => r.modulo === 'blandas').length,
-      promedio: Math.round(
-        this.respuestas.reduce((acc, r) => acc + r.respuesta.length, 0) /
-        (this.respuestas.length || 1)
-      )
-    };
+    // Resumen general
+    const scored = this.respuestas.filter((item) => typeof item.score === 'number');
+    const avg = scored.length
+      ? (scored.reduce((acc, item) => acc + item.score, 0) / scored.length).toFixed(1)
+      : 'N/D';
+    addSection('RESUMEN GENERAL',
+      `Preguntas respondidas: ${this.respuestas.length}\n` +
+      `Puntuación promedio: ${avg} / 5`
+    );
+
+    // Detalle por pregunta
     this.respuestas.forEach((item, i) => {
-      const type = item.modulo === 'tecnicas' ? 'TÉCNICA' : 'BLANDA';
-      const fb = item.feedback;
+      const feedbackLines =
+        `Fortalezas:\n` +
+        (item.feedback?.fortalezas || []).map((f) => `  • ${f}`).join('\n') +
+        `\n\nOportunidades de mejora:\n` +
+        (item.feedback?.mejoras || []).map((m) => `  • ${m}`).join('\n') +
+        `\n\nConsejo:\n  ${item.feedback?.tip || ''}`;
 
-      // Construimos un string legible según si fb es objeto o cadena
-      let feedbackText;
-      if (typeof fb === 'object' && fb !== null) {
-        feedbackText =
-          'Fortalezas:\n' +
-          (fb.fortalezas || []).map(f => `• ${f}`).join('\n') +
-          '\n\n' +
-          'Oportunidades:\n' +
-          (fb.mejoras || []).map(m => `• ${m}`).join('\n') +
-          '\n\n' +
-          'Tip:\n' +
-          (fb.tip || '');
-      } else {
-        feedbackText = fb;  // Si algo salió mal, lo imprimimos tal cual
-      }
-
-      addSection(
-        `PREGUNTA ${i + 1}`,
-        `Tipo: ${type}\n` +
-        `Pregunta: ${item.pregunta}\n` +
-        `Respuesta: ${item.respuesta}\n\n` +
-        feedbackText
+      addSection(`PREGUNTA ${i + 1} — ${String(item.score ?? '-')}/5`,
+        `Etapa: ${item.etapa || 'General'}\n` +
+        `Pregunta: ${item.pregunta}\n\n` +
+        `Tu respuesta:\n${item.respuesta}\n\n` +
+        feedbackLines
       );
     });
-    doc.setFillColor(...this.config.colores.piePagina);
-    doc.rect(0, 285, doc.internal.pageSize.width, 15, 'F');
-    doc.setFontSize(this.config.fuentes.pequeño);
-    doc.setTextColor(255, 255, 255);
-    doc.text("Documento oficial - Tecnológico Nacional de México | LITP", margin, 292);
-    doc.text(`Generado: ${new Date().toLocaleDateString()}`, doc.internal.pageSize.width - margin, 292, null, 'right');
 
-    doc.save(`Informe_${this.d.nombre || ""}_${this.d.control || ""}.pdf`);
+    // Pie de página
+    doc.setFillColor(...this.config.colores.header);
+    doc.rect(0, 282, pageW, 15, 'F');
+    doc.setFontSize(this.config.fuentes.etiqueta);
+    doc.setTextColor(255, 255, 255);
+    doc.text(`Documento generado con ${this.config.marca}`, margin, 289);
+    doc.text('Práctica de entrevistas laborales', pageW - margin, 289, { align: 'right' });
+
+    const nombreArchivo = `informe_${(this.d.nombre || 'candidato').trim().replace(/\s+/g, '_')}.pdf`;
+    doc.save(nombreArchivo);
   }
 }

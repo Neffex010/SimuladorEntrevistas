@@ -1,0 +1,12 @@
+# Dependencias y cachés
+node_modules/
+.vercel/
+
+# Sistemas operativos
+.DS_Store
+Thumbs.db
+
+# Entorno y secretos
+.env
+.env.*
+*.local

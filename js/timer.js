@@ -1,4 +1,4 @@
-// ---------- src/timer.js ----------
+// ---------- js/timer.js ----------
 export class Timer {
   constructor(displayElem, duration, onTimeout) {
     this.displayElem = displayElem;
@@ -8,6 +8,10 @@ export class Timer {
     this._intervalId = null;
   }
 
+  get remaining() {
+    return this._remaining;
+  }
+
   start() {
     this.reset();
     this._intervalId = setInterval(() => {
@@ -15,7 +19,7 @@ export class Timer {
       this.updateDisplay();
       if (this._remaining <= 0) {
         this.stop();
-        this.onTimeout();
+        if (typeof this.onTimeout === 'function') this.onTimeout();
       }
     }, 1000);
   }
@@ -34,6 +38,10 @@ export class Timer {
   }
 
   updateDisplay() {
-    this.displayElem.textContent = `${this._remaining}s`;
+    if (this.displayElem) {
+      this.displayElem.textContent = `${this._remaining}s`;
+      this.displayElem.classList.toggle('warn', this._remaining <= 15 && this._remaining > 5);
+      this.displayElem.classList.toggle('danger', this._remaining <= 5);
+    }
   }
 }

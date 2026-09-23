@@ -1,332 +1,180 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bienvenido al Simulador</title>
+  <title>EntrevistaLab — Practica entrevistas laborales y mejora tus respuestas</title>
+  <meta name="description" content="Practica entrevistas laborales en tecnología con preguntas reales, feedback inmediato y un informe descargable de tu desempeño." />
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="icon" href="./image/favicon.png" type="image/png" />
 
-  <!-- Bootstrap Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <!-- FontAwesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-  <!-- AOS CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
-
-  <!-- Google Fonts: Poppins -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-
-
-  <!-- Favicon -->
-  <link rel="icon" href="./image/favicon.png" type="image/x-icon">
-
-  <!-- CSS Personalizado -->
-  <link rel="stylesheet" href="./css/diseño.css">
+  <link rel="stylesheet" href="./css/styles.css" />
 </head>
-
 <body>
 
-  <!-- Cabecera -->
-  <header>
+  <header class="site-header">
     <div class="container">
-      <img src="./image/Tecnologico_Nacional_de_Mexico.svg.png" alt="Logo Tecnológico Nacional de México"
-        class="logo rounded shadow" style="background: white; padding: 10px;" data-aos="fade-right" />
-
-      <!-- Tagline dinámico -->
-      <span class="tagline" data-aos="fade-down">Domina tu futuro en TICs</span>
-
-      <img src="./image/LITP.png" alt="Logo ITP Pachuca" class="logo rounded shadow"
-        style="background: white; padding: 10px;" data-aos="fade-left" />
+      <a class="brand" href="./index.html" aria-label="EntrevistaLab, inicio">
+        <span class="brand-mark" aria-hidden="true">EL</span>
+        <span>EntrevistaLab</span>
+      </a>
+      <div class="header-actions">
+        <a class="icon-btn" href="https://github.com/Neffex010/SimuladorEntrevistas" target="_blank" rel="noopener" aria-label="Ver código fuente" title="Código fuente">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        </a>
+        <button class="icon-btn" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Claro / oscuro">
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+        </button>
+      </div>
     </div>
   </header>
 
-  <!-- Contenido principal -->
-  <main class="container mt-5" data-aos="fade-up">
-    <div class="row">
-      <!-- Formulario -->
-      <div class="col-md-6">
-        <div class="card shadow-lg mb-4" data-aos="fade-up">
-          <div class="card-body">
-            <h2 class="text-center mb-4">Bienvenido al Simulador de Entrevistas</h2>
-            <p class="text-center">Por favor, completa tus datos para comenzar con la simulación.</p>
-            <form id="formDatos">
-              <div class="mb-3">
-                <label for="control" class="form-label">Número de Control</label>
-                <input type="text" class="form-control" id="control" required placeholder="Ej. 22200205" />
-              </div>
-              <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre(s)</label>
-                <input type="text" class="form-control" id="nombre" required />
-              </div>
-              <div class="mb-3">
-                <label for="apellidos" class="form-label">Apellidos</label>
-                <input type="text" class="form-control" id="apellidos" required />
-              </div>
-              <div class="mb-3">
-                <label for="correo" class="form-label">
-                  <i class="bi bi-envelope me-1"></i>Correo electrónico
-                </label>
-                <input type="email" class="form-control" id="correo" required />
-              </div>
-              <div class="mb-3">
-                <label for="telefono" class="form-label">Número de Teléfono</label>
-                <input type="tel" class="form-control" id="telefono" required />
-              </div>
-              <div class="text-center">
-                <button type="submit" class="btn btn-primary">Entrar al Simulador</button>
-              </div>
-            </form>
+  <main>
+
+    <!-- Hero + registro -->
+    <section class="hero">
+      <div class="container">
+        <span class="tag">Sesión de práctica · registro de participante</span>
+        <h1 class="hero-title">Ensayo de entrevista técnica.<br />Con pregunta, cronómetro e informe.</h1>
+        <p class="hero-sub">
+          Eliges un perfil, respondes con escritura o voz, y al terminar
+          obtienes el análisis de cada respuesta en un documento.
+        </p>
+      </div>
+
+      <div class="container">
+        <form id="formDatos" class="reg-sheet" novalidate>
+          <div class="sheet-head">
+            <span class="sheet-title" id="registro">Datos de la sesión</span>
+            <span class="meta">La información se guarda solo en tu navegador.</span>
+          </div>
+
+          <div class="sheet-grid">
+            <div class="field span-5">
+              <label for="nombre">Nombre(s)</label>
+              <input class="input" type="text" id="nombre" name="nombre" required autocomplete="given-name" />
+            </div>
+
+            <div class="field span-7">
+              <label for="apellidos">Apellidos</label>
+              <input class="input" type="text" id="apellidos" name="apellidos" required autocomplete="family-name" />
+            </div>
+
+            <div class="field span-7">
+              <label for="correo">Correo electrónico</label>
+              <input class="input" type="email" id="correo" name="correo" required autocomplete="email" />
+            </div>
+
+            <div class="field span-5">
+              <label for="campo">Área a la que aplicas</label>
+              <select class="input" id="campo" name="campo" required>
+                <option value="">Selecciona una opción</option>
+              </select>
+            </div>
+
+            <div class="field span-5">
+              <label for="experiencia">Experiencia <span class="hint">(opcional)</span></label>
+              <select class="input" id="experiencia" name="experiencia">
+                <option value="">Selecciona</option>
+                <option value="0-1">Sin experiencia</option>
+                <option value="1-3">1 a 3 años</option>
+                <option value="3-5">3 a 5 años</option>
+                <option value="5+">Más de 5 años</option>
+              </select>
+            </div>
+
+            <div class="field span-7">
+              <label for="telefono">Teléfono <span class="hint">(opcional)</span></label>
+              <input class="input" type="tel" id="telefono" name="telefono" autocomplete="tel" />
+            </div>
+          </div>
+
+          <p class="form-error" id="formError" role="alert" hidden></p>
+
+          <div class="btn-row">
+            <button type="submit" class="btn btn-accent btn-block">Comenzar la práctica</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Cómo funciona -->
+    <section class="steps">
+      <div class="container">
+        <div class="section-head">
+          <h2>Así se desarrolla</h2>
+          <p>De la primera respuesta al informe final, todo en unos minutos.</p>
+        </div>
+        <ol class="steps-list">
+          <li>
+            <span class="step-no" aria-hidden="true">01</span>
+            <div>
+              <h3>Elige tu área</h3>
+              <p>Frontend, backend, datos, DevOps o un enfoque general. Cada perfil usa sus propias preguntas.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-no" aria-hidden="true">02</span>
+            <div>
+              <h3>Responde por escritura o por voz</h3>
+              <p>Cada pregunta tiene un tiempo límite en pantalla; decides cuántos segundos por respuesta.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-no" aria-hidden="true">03</span>
+            <div>
+              <h3>Revisa el informe</h3>
+              <p>Al terminar hay una puntuación por etapa, un desglose de cada respuesta y un PDF descargable.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Preguntas frecuentes -->
+    <section class="faq">
+      <div class="container">
+        <div class="section-head">
+          <h2>Preguntas frecuentes</h2>
+        </div>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3>¿Tengo que ser programador para usarlo?</h3>
+            <p>No. La práctica sirve para cualquier persona que vaya a enfrentar una entrevista en el área de tecnología, sin importar su nivel.</p>
+          </div>
+          <div class="faq-item">
+            <h3>¿Guardan mis respuestas?</h3>
+            <p>No hay registro central. Tus datos se guardan solo en tu navegador y las respuestas se usan únicamente para generar el feedback.</p>
+          </div>
+          <div class="faq-item">
+            <h3>¿Cómo se evalúan mis respuestas?</h3>
+            <p>Cada respuesta se analiza y se te devuelven puntos fuertes, consejos de mejora y una calificación del 1 al 5.</p>
+          </div>
+          <div class="faq-item">
+            <h3>¿Puedo repetir la práctica?</h3>
+            <p>Sí. Puedes reiniciar cuando quieras y con el área que prefieras, las veces que necesites.</p>
           </div>
         </div>
       </div>
-
-      <!-- Imagen Mascota -->
-      <div class="col-md-6 d-flex align-items-center justify-content-center">
-        <img src="./image/mascota.png" alt="Mascota Institucional" class="mascota-img" data-aos="zoom-in" />
-      </div>
-    </div>
+    </section>
   </main>
 
-  <!-- Footer Moderno -->
-  <footer class="footer-modern mt-auto">
+  <footer class="site-footer">
     <div class="container">
-      <div class="row mb-3 justify-content-between align-items-center">
-        <!-- Botones de funcionalidad -->
-        <div class="col-12 col-md-6 text-center text-md-start">
-          <div class="footer-icons">
-
-            <!-- Botón estilizado con ícono para abrir el modal del equipo -->
-            <button class="footer-btn" data-bs-toggle="modal" data-bs-target="#equipoModal" title="Equipo">
-              <i class="bi bi-people-fill"></i>
-
-            </button>
-
-            <!-- Botón para abrir el modal del equipo -->
-
-
-            <button class="footer-btn" data-bs-toggle="modal" data-bs-target="#ayudaModal" title="Ayuda">
-              <i class="bi bi-question-circle-fill"></i>
-            </button>
-            <button class="footer-btn" data-bs-toggle="modal" data-bs-target="#contactoModal" title="Contacto">
-              <i class="bi bi-envelope-fill"></i>
-            </button>
-            <button class="footer-btn" id="toggleDarkMode" title="Modo Oscuro">
-              <i class="bi bi-moon-stars-fill"></i>
-            </button>
-
-          </div>
-        </div>
-        <!-- Enlaces a portales y Facebook -->
-        <div class="col-12 col-md-6 text-center text-md-end">
-          <div class="footer-socials">
-            <a href="http://virtual.itpachuca.edu.mx/moodle/" target="_blank" class="footer-btn"
-              title="Moodle ITPachuca">
-              <i class="bi bi-mortarboard-fill"></i>
-            </a>
-            <a href="https://itp.itpachuca.edu.mx/" target="_blank" class="footer-btn" title="Portal ITPachuca">
-              <i class="bi bi-building-fill"></i>
-            </a>
-            <a href="http://189.203.154.61/" target="_blank" class="footer-btn" title="Sistema Interno ITPachuca">
-              <i class="bi bi-window-sidebar"></i>
-            </a>
-            <a href="https://www.facebook.com/ITPachucaOficial" target="_blank" class="footer-btn"
-              title="Facebook ITPachuca">
-              <i class="bi bi-facebook"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col text-center small mt-2 footer-copy">
-          © 2025 <i class="bi bi-mortarboard-fill"></i> Instituto Tecnológico de Pachuca | Simulador de Entrevistas
-          Laborales | Versión 1.0
-        </div>
-      </div>
-
+      <span class="muted">© <span id="year">2026</span> EntrevistaLab</span>
+      <nav>
+        <a href="#registro">Comenzar</a>
+        <a href="https://github.com/Neffex010/SimuladorEntrevistas" target="_blank" rel="noopener">Código fuente</a>
+      </nav>
     </div>
   </footer>
 
-  <!-- Modales -->
-  <div class="modal fade" id="ayudaModal" tabindex="-1" aria-labelledby="ayudaModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="ayudaModalLabel">Ayuda</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
-        <div class="modal-body">
-          <h5>¿Cómo usar el Simulador de Entrevistas?</h5>
-          <p>Este simulador está diseñado para ayudarte a practicar y mejorar tus habilidades en entrevistas laborales
-            en el ámbito de las Tecnologías de la Información y Comunicaciones (TIC). Sigue estos pasos:</p>
-          <ul>
-            <li><strong>Paso 1:</strong> Completa el formulario con tu información personal. Asegúrate de ingresar un
-              número de control válido, tu nombre completo, correo electrónico y número de teléfono.</li>
-            <li><strong>Paso 2:</strong> Una vez que hayas completado el formulario, haz clic en "Entrar al Simulador".
-              Esto te llevará a una serie de preguntas comunes en entrevistas laborales para evaluar tu preparación.
-            </li>
-            <li><strong>Paso 3:</strong> Responde las preguntas de la entrevista de la mejor manera posible. El
-              simulador te dará retroalimentación instantánea para ayudarte a mejorar tus respuestas.</li>
-            <li><strong>Consejo:</strong> Si no estás seguro de alguna respuesta, no dudes en pedir ayuda o buscar más
-              información en línea para mejorar tus conocimientos.</li>
-          </ul>
-          <p>Si tienes alguna duda o problema, no dudes en ponerte en contacto con nosotros a través del modal de
-            "Contacto".</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="contactoModal" tabindex="-1" aria-labelledby="contactoModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="contactoModalLabel">Contacto</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
-        <div class="modal-body">
-          <p>¿Tienes alguna duda o necesitas asistencia?</p>
-          <p>Para cualquier consulta relacionada con el simulador, no dudes en escribirnos:</p>
-          <p><strong>Correo Electrónico:</strong> <a href="mailto:info@simulador.com">info@simulador.com</a></p>
-          <p>Te responderemos lo antes posible para ayudarte a resolver cualquier inconveniente.</p>
-          <p>¡Gracias por usar nuestro Simulador de Entrevistas Laborales!</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <!-- Modal Equipo -->
-  <div class="modal fade" id="equipoModal" tabindex="-1" aria-labelledby="equipoModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="equipoModalLabel">Conoce al Equipo de Desarrollo</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <!-- Integrante 1 -->
-            <div class="col-12 col-md-6 mb-4">
-              <h5>Luis Cabrera</h5>
-              <p>Desarrollador Frontend</p>
-              <div class="text-center">
-                <a href="https://www.facebook.com/share/195w9N1yro/" target="_blank" class="btn-facebook"
-                  title="Facebook">
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://www.instagram.com/enrique_1895_cg?igsh=bGltbjFtdmU1cWp3" target="_blank"
-                  class="btn-instagram" title="Instagram">
-                  <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/luis-enrique-cabrera-garcia-a66113326/" target="_blank"
-                  class="btn-linkedin" title="LinkedIn">
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-              </div>
-
-            </div>
-
-            <!-- Integrante 2 -->
-            <div class="col-12 col-md-6 mb-4">
-              <h5>Denise Campos</h5>
-              <p>Diseñadora UX/UI</p>
-              <div class="text-center">
-                <a href="https://www.facebook.com/share/15Vi6jASix/" target="_blank" class="btn-facebook"
-                  title="Facebook">
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://www.instagram.com/diana_denise_18?igsh=MTF0NTl0MDlwcDFwOQ==" target="_blank"
-                  class="btn-instagram" title="Instagram">
-                  <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/denise-campos-17427534a/" target="_blank" class="btn-linkedin"
-                  title="LinkedIn">
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-              </div>
-
-            </div>
-
-            <!-- Integrante 3 -->
-            <div class="col-12 col-md-6 mb-4">
-              <h5>Rodrigo Noeggerath</h5>
-              <p>Backend Developer</p>
-              <div class="text-center">
-                <a href="https://www.facebook.com/share/1bBCggfwDo/" target="_blank" class="btn-facebook"
-                  title="Facebook">
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://www.instagram.com/rodrigonoeggerath?igsh=bnoyNnRvdG8yY3N2" target="_blank"
-                  class="btn-instagram" title="Instagram">
-                  <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/axel-noeggerath-medina-7758a8325/" target="_blank"
-                  class="btn-linkedin" title="LinkedIn">
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-              </div>
-
-            </div>
-
-            <!-- Integrante 4 -->
-            <div class="col-12 col-md-6 mb-4">
-              <h5>Nicole Lares</h5>
-              <p>Especialista en Testing</p>
-              <div class="text-center">
-                <a href="https://www.facebook.com/share/1C9NkRnZoa/" target="_blank" class="btn-facebook"
-                  title="Facebook">
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://www.instagram.com/elkrackken?igsh=MXF5ajdoYW54MHoyZg==" target="_blank"
-                  class="btn-instagram" title="Instagram">
-                  <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/nicole-dayana-esparza-lares-712b10325/" target="_blank"
-                  class="btn-linkedin" title="LinkedIn">
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- AOS JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <script>
-    AOS.init({
-      duration: 800,
-      offset: 150,
-      once: true
-    });
-  </script>
-
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- JS Personalizado -->
-  <script src="./js/formulario.js" defer></script>
+  <script src="./js/theme.js" defer></script>
+  <script type="module" src="./js/landing.js"></script>
 </body>
-
 </html>

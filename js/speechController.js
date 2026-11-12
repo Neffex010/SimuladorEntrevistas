@@ -1,61 +1,24 @@
 // ---------- js/speechController.js ----------
-// Control de voz: lectura de preguntas (síntesis) y dictado de respuestas (reconocimiento).
+// Reconocimiento de voz: dictado de respuestas (Web Speech API).
 
 export class SpeechController {
-  constructor(btnVoice, btnMute, lang = 'es-MX') {
+  constructor(btnVoice, lang = 'es-MX') {
     this.btnVoice = btnVoice;
-    this.btnMute = btnMute;
     this.lang = lang;
-    this.synthEnabled = true;
     this.recognition = null;
     this.isRecording = false;
     this.onResult = null;
     this.hintEl = document.querySelector('.voice-hint');
     this._recordingHint = 'Habla ahora… tu respuesta se escribirá al final.';
 
-    this._setupButtons();
-    this._updateMuteUI();
-  }
-
-  _setupButtons() {
-    this.btnVoice.addEventListener('click', () => this._handleVoiceClick());
-    if (this.btnMute) {
-      this.btnMute.addEventListener('click', () => this.toggleSynth());
+    if (this.btnVoice) {
+      this.btnVoice.addEventListener('click', () => this._handleVoiceClick());
     }
   }
 
   _handleVoiceClick() {
     if (this.isRecording) this.stopRecognition();
     else this.startRecognition(this.onResult);
-  }
-
-  // ---------- Síntesis (lectura) ----------
-  get _synth() {
-    return window.speechSynthesis || null;
-  }
-
-  speak(text) {
-    if (!this.synthEnabled || !text) return;
-    const synth = this._synth;
-    if (!synth) return;
-    synth.cancel();
-    const utt = new SpeechSynthesisUtterance(text);
-    utt.lang = this.lang;
-    utt.rate = 1;
-    synth.speak(utt);
-  }
-
-  toggleSynth() {
-    this.synthEnabled = !this.synthEnabled;
-    if (this._synth) this._synth.cancel();
-    this._updateMuteUI();
-    return this.synthEnabled;
-  }
-
-  _updateMuteUI() {
-    if (!this.btnMute) return;
-    this.btnMute.textContent = this.synthEnabled ? 'Silenciar voz' : 'Activar voz';
-    this.btnMute.classList.toggle('is-active', !this.synthEnabled);
   }
 
   // ---------- Reconocimiento (dictado) ----------
@@ -119,14 +82,8 @@ export class SpeechController {
     this.isRecording = false;
   }
 
-  stop() {
-    this.stopRecognition();
-    if (this._synth) this._synth.cancel();
-  }
-
   _notifyUser(msg) {
-    const el = document.querySelector('.voice-hint');
-    if (el) el.textContent = msg;
+    if (this.hintEl) this.hintEl.textContent = msg;
   }
 
   _setRecordingUI(active) {
@@ -134,9 +91,5 @@ export class SpeechController {
     this.btnVoice.textContent = active ? 'Grabando…' : 'Hablar';
     this.btnVoice.classList.toggle('is-recording', active);
     if (this.hintEl) this.hintEl.textContent = active ? this._recordingHint : '';
-  }
-
-  setInterviewState(active) {
-    if (!active) this.stopRecognition();
   }
 }

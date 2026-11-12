@@ -2,6 +2,7 @@
 node_modules/
 .vercel/
 .netlify/
+.playwright-mcp/
 
 # Sistemas operativos
 .DS_Store
@@ -10,4 +11,5 @@ Thumbs.db
 # Entorno y secretos
 .env
 .env.*
+!.env.example
 *.local

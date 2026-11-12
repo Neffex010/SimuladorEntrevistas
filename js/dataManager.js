@@ -35,8 +35,4 @@ export class DataManager {
       console.warn('No se pudo guardar en el navegador.', e);
     }
   }
-
-  clear() {
-    localStorage.removeItem(this.storageKey);
-  }
 }

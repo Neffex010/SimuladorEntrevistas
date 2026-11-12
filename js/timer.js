@@ -1,9 +1,10 @@
 // ---------- js/timer.js ----------
 export class Timer {
-  constructor(displayElem, duration, onTimeout) {
+  constructor(displayElem, duration, onTimeout, statusElem = null) {
     this.displayElem = displayElem;
     this.duration = duration;
     this.onTimeout = onTimeout;
+    this.statusElem = statusElem;
     this._remaining = duration;
     this._intervalId = null;
   }
@@ -27,6 +28,7 @@ export class Timer {
   reset() {
     this.stop();
     this._remaining = this.duration;
+    if (this.statusElem) this.statusElem.textContent = '';
     this.updateDisplay();
   }
 
@@ -42,6 +44,20 @@ export class Timer {
       this.displayElem.textContent = `${this._remaining}s`;
       this.displayElem.classList.toggle('warn', this._remaining <= 15 && this._remaining > 5);
       this.displayElem.classList.toggle('danger', this._remaining <= 5);
+    }
+    this._announceRemaining();
+  }
+
+  // Anuncia solo los hitos importantes para no hablar cada segundo.
+  _announceRemaining() {
+    if (!this.statusElem) return;
+
+    if (this._remaining === 15) {
+      this.statusElem.textContent = 'Quedan 15 segundos.';
+    } else if (this._remaining === 5) {
+      this.statusElem.textContent = 'Quedan 5 segundos.';
+    } else if (this._remaining === 0) {
+      this.statusElem.textContent = 'Tiempo agotado.';
     }
   }
 }

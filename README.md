@@ -1,8 +1,8 @@
-# EntrevistaLab — Simulador de entrevistas laborales en tecnología
+# EntrevistaLab — Simulador de entrevistas laborales para cualquier área
 
-Practica entrevistas técnicas reales, recibe retroalimentación inmediata por
-respuesta y descarga un informe PDF con tu desempeño. Sin registro, sin bases
-de datos: tus datos viven solo en tu navegador.
+Practica entrevistas reales de tu profesión, recibe retroalimentación inmediata
+por respuesta y revisa un informe con tu desempeño. Sin registro, sin bases de
+datos: tus datos viven solo en tu navegador.
 
 ## Sitio en vivo
 
@@ -11,13 +11,16 @@ de datos: tus datos viven solo en tu navegador.
 
 ## Características
 
-- **5 perfiles de práctica**: Perfil TIC general, Frontend, Backend, Datos y Analítica, DevOps y Cloud.
-- **3 etapas por sesión**: presentación/trayectoria, habilidades técnicas y habilidades blandas.
-- **Tiempo por pregunta configurable** (30 s a 120 s) con cronómetro en pantalla.
-- **Respuestas por escritura o dictado por voz** (Web Speech API) y lectura de preguntas en voz alta.
+- **15 perfiles de práctica en 9 sectores**: tecnología, negocios y administración, salud, educación, derecho, diseño, ingeniería, recursos humanos y un perfil general para cualquier otra área.
+- **Dos modos de práctica**: rápida (6 preguntas) o completa (12 preguntas).
+- **3 etapas por sesión**: presentación/trayectoria, habilidades del área y habilidades blandas.
+- **Tiempo por pregunta configurable** (30 s a 120 s) con cronómetro en pantalla, dentro de "Ajustes de la sesión".
+- **Respuestas por escritura o dictado por voz** (Web Speech API).
+- **Atajos de teclado**: `Ctrl/Cmd + Enter` envía la respuesta; `Enter` crea una línea nueva.
 - **Retroalimentación de IA (OpenAI)**: fortalezas, áreas de mejora, consejo y puntuación 1–5 por respuesta.
-- **Informe PDF descargable** con datos del participante, promedio general y detalle por pregunta.
-- **Vista previa del informe** en un modal antes de descargar.
+- **Resumen final** con la puntuación por etapa y las fortalezas que más se repiten.
+- **Informe en pantalla** (modal) con datos del participante, promedio general y detalle colapsable por pregunta.
+- **Diseño responsive** para escritorio, tablet y celular.
 - **Tema claro/oscuro** persistente.
 
 ## Tecnologías
@@ -25,25 +28,23 @@ de datos: tus datos viven solo en tu navegador.
 - HTML, CSS y JavaScript vanilla (ES modules) — sin frameworks.
 - Backend serverless en Netlify Functions.
 - OpenAI API (`gpt-4o-mini`) para el análisis de respuestas.
-- jsPDF vía CDN para generar el informe.
 
 ## Estructura del proyecto
 
 ```
-├── index.html                 # Landing con formulario de registro
+├── index.html                 # Landing con datos de la sesión
 ├── simulador.html             # Configuración, entrevista, feedback y resultado
 ├── css/
 │   └── styles.css             # Diseño "panel de instrumentos" (tokens en :root)
 ├── js/
 │   ├── index.js               # Arranque del simulador
 │   ├── landing.js             # Landing: roles, validación y guardado en localStorage
-│   ├── config.js              # Roles, preguntas, settings, URLs y colores del PDF
+│   ├── config.js              # Roles, preguntas, modos, settings y URLs
 │   ├── dataManager.js         # Lectura/escritura de datos locales
 │   ├── interviewSimulator.js  # Orquestador principal del flujo
 │   ├── timer.js               # Cronómetro por pregunta
-│   ├── speechController.js    # Síntesis (leer) y reconocimiento (dictar)
+│   ├── speechController.js    # Reconocimiento de voz (dictado)
 │   ├── previewModal.js        # Vista previa del informe (segura ante XSS)
-│   ├── pdfReportGenerator.js  # Generación del PDF
 │   └── theme.js               # Tema claro/oscuro
 ├── netlify/
 │   └── functions/
@@ -56,21 +57,22 @@ de datos: tus datos viven solo en tu navegador.
 
 ## Cómo usarlo
 
-1. Ingresa tu nombre, apellidos, correo y el área a la que aplicas.
-2. Elige perfil, tiempo por pregunta y las opciones de voz en el simulador.
+1. Ingresa tu nombre, apellidos y el área a la que aplicas.
+2. Elige el perfil y el modo de práctica (rápida o completa). Si lo necesitas, abre
+   "Ajustes de la sesión" para cambiar el tiempo por pregunta o activar el dictado.
 3. Responde cada pregunta por teclado o dictando. Cuando termine el tiempo, la
    respuesta se envía sola.
-4. Revisa el feedback de cada respuesta y continúa (auto-avanza tras 12 s con
-   botón "Continuar").
-5. Al terminar verás tu puntuación por etapa; previsualiza el informe y
-   descárgalo en PDF.
+4. Revisa el feedback de cada respuesta y pulsa "Continuar".
+5. Al terminar verás tu puntuación por etapa, las fortalezas que más se repiten y
+   el informe completo en pantalla.
 
 > El reconocimiento de voz requiere un navegador compatible (Chrome/Edge) y
 > funciona sobre HTTPS o `localhost` (no desde `file://`).
 
 ## Desarrollo local
 
-El frontend es 100% estático; abre `index.html` directamente o sirve la carpeta:
+El frontend es 100% estático. Sirve la carpeta con cualquier servidor local
+(los ES modules no funcionan abriendo el archivo directamente):
 
 ```bash
 # Cualquier servidor estático
@@ -90,10 +92,31 @@ netlify dev
    configura `publish = "."` y el directorio de funciones).
 2. Agrega la variable de entorno `OPENAI_API_KEY` con tu clave de OpenAI en
    *Site settings → Environment variables*.
-3. Si el nombre del sitio difiere de `simuladorentre`, actualiza
+3. Ajusta `ALLOWED_ORIGINS` con los dominios desde los que se usará la app.
+   Si no se define, se permiten el sitio de Netlify y `localhost:8080`.
+4. Si el nombre del sitio difiere de `simuladorentre`, actualiza
    `APP_SETTINGS.apiPrimary` en `js/config.js`.
 
-El endpoint usa CORS abierto (`*`), por lo que funciona desde GitHub Pages.
+### Variables de entorno
+
+Todas son opcionales salvo `OPENAI_API_KEY`. Puedes partir de
+`.env.example` para desarrollo local con `netlify dev`.
+
+| Variable | Uso | Valor por defecto |
+| --- | --- | --- |
+| `OPENAI_API_KEY` | Clave para el análisis de respuestas. | — (obligatoria) |
+| `ALLOWED_ORIGINS` | Orígenes permitidos por CORS, separados por coma. | `https://simuladorentre.netlify.app`, `http://localhost:8080`, `http://127.0.0.1:8080` |
+| `RATE_LIMIT_MAX` | Solicitudes permitidas por IP en cada ventana. | `10` |
+| `RATE_LIMIT_WINDOW_SECONDS` | Duración de la ventana del límite, en segundos. | `60` |
+| `UPSTASH_REDIS_REST_URL` | URL de Upstash para compartir el límite entre instancias. | — (respaldo en memoria) |
+| `UPSTASH_REDIS_REST_TOKEN` | Token de Upstash. | — |
+
+> Sin Upstash, el límite se guarda en memoria y solo protege dentro de una
+> instancia cálida. Con Upstash se comparte entre todas las instancias.
+
+El endpoint ya no usa CORS abierto: solo responde a los orígenes de
+`ALLOWED_ORIGINS`. Si publicas el frontend en GitHub Pages, agrega ese dominio
+a la variable.
 
 ## API
 
@@ -106,6 +129,9 @@ El endpoint usa CORS abierto (`*`), por lo que funciona desde GitHub Pages.
 }
 ```
 
+Límites: `answer` hasta 2000 caracteres y `question` hasta 300. El análisis
+tiene un timeout de 9 segundos y la respuesta se normaliza antes de devolverla.
+
 Respuesta:
 
 ```json
@@ -116,6 +142,20 @@ Respuesta:
   "score": 4
 }
 ```
+
+Códigos de error:
+
+| HTTP | `code` | Significado |
+| --- | --- | --- |
+| `400` | `missing_answer` | La respuesta está vacía. |
+| `400` | `answer_too_long` | Supera los 2000 caracteres. |
+| `403` | — | Origen no incluido en `ALLOWED_ORIGINS`. |
+| `405` | — | Método distinto de `POST`. |
+| `429` | `rate_limited` | Se superó el límite por IP; incluye `Retry-After`. |
+| `500` | `missing_api_key` | Falta `OPENAI_API_KEY`. |
+| `502` | `upstream_error` | OpenAI respondió con error. |
+| `504` | `timeout` | El análisis superó los 9 segundos. |
+| `500` | `internal_error` | Fallo inesperado del handler. |
 
 ## Notas
 

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EntrevistaLab — Practica entrevistas laborales y mejora tus respuestas</title>
-  <meta name="description" content="Practica entrevistas laborales en tecnología con preguntas reales, feedback inmediato y un informe descargable de tu desempeño." />
+  <title>EntrevistaLab — Practica entrevistas laborales de cualquier área</title>
+  <meta name="description" content="Practica entrevistas laborales de cualquier área con preguntas reales, feedback inmediato y un informe de tu desempeño." />
 
   <link rel="icon" href="./image/favicon.png" type="image/png" />
 
@@ -36,15 +36,21 @@
 
   <main>
 
-    <!-- Hero + registro -->
+    <!-- Hero + datos de la sesión -->
     <section class="hero">
       <div class="container">
-        <span class="tag">Sesión de práctica · registro de participante</span>
-        <h1 class="hero-title">Ensayo de entrevista técnica.<br />Con pregunta, cronómetro e informe.</h1>
+        <span class="tag">Sesión de práctica · sin registro</span>
+        <h1 class="hero-title">Tu próxima entrevista, ensayada.<br />Para cualquier carrera.</h1>
         <p class="hero-sub">
-          Eliges un perfil, respondes con escritura o voz, y al terminar
-          obtienes el análisis de cada respuesta en un documento.
+          Elige tu área, responde por escrito o dictando y recibe
+          retroalimentación inmediata con un informe de tu desempeño.
         </p>
+
+        <ul class="hero-points">
+          <li>15 perfiles: salud, educación, negocios, derecho, tecnología y más</li>
+          <li>Feedback con IA en cada respuesta</li>
+          <li>Todo queda en tu navegador</li>
+        </ul>
       </div>
 
       <div class="container">
@@ -65,32 +71,12 @@
               <input class="input" type="text" id="apellidos" name="apellidos" required autocomplete="family-name" />
             </div>
 
-            <div class="field span-7">
-              <label for="correo">Correo electrónico</label>
-              <input class="input" type="email" id="correo" name="correo" required autocomplete="email" />
-            </div>
-
-            <div class="field span-5">
+            <div class="field field-wide">
               <label for="campo">Área a la que aplicas</label>
-              <select class="input" id="campo" name="campo" required>
-                <option value="">Selecciona una opción</option>
+              <select class="input" id="campo" name="campo" required aria-describedby="roleHint">
+                <option value="">Selecciona tu área</option>
               </select>
-            </div>
-
-            <div class="field span-5">
-              <label for="experiencia">Experiencia <span class="hint">(opcional)</span></label>
-              <select class="input" id="experiencia" name="experiencia">
-                <option value="">Selecciona</option>
-                <option value="0-1">Sin experiencia</option>
-                <option value="1-3">1 a 3 años</option>
-                <option value="3-5">3 a 5 años</option>
-                <option value="5+">Más de 5 años</option>
-              </select>
-            </div>
-
-            <div class="field span-7">
-              <label for="telefono">Teléfono <span class="hint">(opcional)</span></label>
-              <input class="input" type="tel" id="telefono" name="telefono" autocomplete="tel" />
+              <p class="field-hint" id="roleHint" aria-live="polite"></p>
             </div>
           </div>
 
@@ -115,21 +101,21 @@
             <span class="step-no" aria-hidden="true">01</span>
             <div>
               <h3>Elige tu área</h3>
-              <p>Frontend, backend, datos, DevOps o un enfoque general. Cada perfil usa sus propias preguntas.</p>
+              <p>Salud, educación, negocios, derecho, diseño, ingeniería, tecnología o el perfil general. Cada área tiene sus propias preguntas.</p>
             </div>
           </li>
           <li>
             <span class="step-no" aria-hidden="true">02</span>
             <div>
-              <h3>Responde por escritura o por voz</h3>
-              <p>Cada pregunta tiene un tiempo límite en pantalla; decides cuántos segundos por respuesta.</p>
+              <h3>Responde a tu ritmo</h3>
+              <p>Escribiendo o dictando. Tú decides cuántos segundos dedicar a cada pregunta.</p>
             </div>
           </li>
           <li>
             <span class="step-no" aria-hidden="true">03</span>
             <div>
-              <h3>Revisa el informe</h3>
-              <p>Al terminar hay una puntuación por etapa, un desglose de cada respuesta y un PDF descargable.</p>
+              <h3>Recibe feedback y revisa tu informe</h3>
+              <p>Puntuación por etapa, puntos fuertes, áreas de mejora y un consejo concreto en cada respuesta.</p>
             </div>
           </li>
         </ol>
@@ -143,22 +129,30 @@
           <h2>Preguntas frecuentes</h2>
         </div>
         <div class="faq-grid">
-          <div class="faq-item">
-            <h3>¿Tengo que ser programador para usarlo?</h3>
-            <p>No. La práctica sirve para cualquier persona que vaya a enfrentar una entrevista en el área de tecnología, sin importar su nivel.</p>
-          </div>
-          <div class="faq-item">
-            <h3>¿Guardan mis respuestas?</h3>
-            <p>No hay registro central. Tus datos se guardan solo en tu navegador y las respuestas se usan únicamente para generar el feedback.</p>
-          </div>
-          <div class="faq-item">
-            <h3>¿Cómo se evalúan mis respuestas?</h3>
+          <details class="faq-item">
+            <summary>¿Sirve si mi carrera no es de tecnología?</summary>
+            <p>Sí. Hay perfiles de salud, educación, derecho, negocios, diseño, ingeniería, recursos humanos y una opción general para cualquier otra área.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Necesito crear una cuenta?</summary>
+            <p>No. Solo escribes tu nombre y eliges tu área. No hay registro, contraseña ni base de datos central.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Guardan mis respuestas?</summary>
+            <p>Tus datos se guardan solo en tu navegador y las respuestas se usan únicamente para generar el feedback.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Cómo se evalúan mis respuestas?</summary>
             <p>Cada respuesta se analiza y se te devuelven puntos fuertes, consejos de mejora y una calificación del 1 al 5.</p>
-          </div>
-          <div class="faq-item">
-            <h3>¿Puedo repetir la práctica?</h3>
-            <p>Sí. Puedes reiniciar cuando quieras y con el área que prefieras, las veces que necesites.</p>
-          </div>
+          </details>
+          <details class="faq-item">
+            <summary>¿Puedo repetir la práctica?</summary>
+            <p>Sí. Puedes reiniciar cuando quieras y cambiar de área las veces que necesites.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Funciona en el celular?</summary>
+            <p>Sí. La interfaz se adapta a pantallas pequeñas y puedes responder con el teclado del teléfono.</p>
+          </details>
         </div>
       </div>
     </section>

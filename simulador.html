@@ -10,7 +10,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="./css/styles.css" />
 </head>
@@ -45,9 +45,9 @@
       <!-- ===== Configuración previa ===== -->
       <section class="card setup-card" id="setupCard">
         <div class="section-head">
-          <span class="tag">Antes de comenzar</span>
-          <h2>Configura tu práctica</h2>
-          <p>Elige tu área y el ritmo. Después responde como en una entrevista real.</p>
+          <span class="tag">Paso 1 · Configuración</span>
+          <h2>Prepara la sesión</h2>
+          <p>Elige área y ritmo. El resto es opcional.</p>
         </div>
 
         <div class="option-grid">
@@ -80,7 +80,7 @@
 
         <details class="setup-advanced" id="setupAdvanced">
           <summary>
-            <span>Ajustes de la sesión</span>
+            <span>Tiempo y dictado</span>
             <span class="setup-advanced-hint" id="setupAdvancedHint"></span>
           </summary>
           <div class="option-grid setup-advanced-body">
@@ -117,7 +117,7 @@
           <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
           <ol class="stage-steps" id="stageSteps" aria-label="Etapas de la entrevista">
             <li data-stage="intro">Presentación</li>
-            <li data-stage="tecnicas">Técnicas</li>
+            <li data-stage="tecnicas">Área</li>
             <li data-stage="blandas">Blandas</li>
           </ol>
         </div>
@@ -126,7 +126,7 @@
           <div class="question-head">
             <span class="timer" id="timer" aria-hidden="true">--</span>
             <span class="sr-only" id="timerStatus" aria-live="polite"></span>
-            <span class="meta">Responde con calma y honestidad.</span>
+            <span class="meta">Tiempo restante</span>
           </div>
 
           <h3 class="question-text" id="questionText" aria-live="polite"></h3>
@@ -134,15 +134,14 @@
           <textarea class="input" id="txtAnswer" rows="4" maxlength="2000" autocomplete="off" aria-describedby="answerHelp voiceHint" placeholder="Escribe tu respuesta aquí…"></textarea>
           <p class="input-help" id="answerHelp">Enter crea una línea nueva · Ctrl/Cmd + Enter envía</p>
 
-          <p class="voice-hint" id="voiceHint"></p>
-
-          <div class="answer-actions">
-            <button class="btn btn-soft" id="btnVoice">Hablar</button>
-          </div>
+          <p class="voice-hint" id="voiceHint" aria-live="polite"></p>
 
           <div class="action-bar">
-            <button class="btn btn-ghost" id="btnSkip">Omitir pregunta</button>
-            <button class="btn btn-accent" id="btnNext">Siguiente</button>
+            <button class="btn btn-soft" id="btnVoice">Hablar</button>
+            <div class="action-group">
+              <button class="btn btn-ghost" id="btnSkip">Omitir</button>
+              <button class="btn btn-accent" id="btnNext">Siguiente</button>
+            </div>
           </div>
         </div>
 
@@ -155,17 +154,17 @@
           </div>
 
           <div class="fb-block ok">
-            <h4>Lo que hiciste bien</h4>
+            <h4>Bien</h4>
             <ul id="fbFortalezas"></ul>
           </div>
 
           <div class="fb-block grow">
-            <h4>Puedes mejorar</h4>
+            <h4>A mejorar</h4>
             <ul id="fbMejoras"></ul>
           </div>
 
           <div class="fb-block tip">
-            <h4>Consejo para la próxima</h4>
+            <h4>Consejo</h4>
             <div id="fbTip"></div>
           </div>
 
@@ -177,9 +176,12 @@
 
       <!-- ===== Resultado ===== -->
       <section class="card result-card" id="resultCard" hidden>
-        <span class="tag">Práctica completada</span>
+        <span class="tag">Sesión completada</span>
         <h2>Tu desempeño</h2>
-        <div class="score-hero" id="resultScore">—</div>
+        <div class="score-hero-wrap">
+          <span class="score-kicker">Promedio</span>
+          <div class="score-hero" id="resultScore">—</div>
+        </div>
         <p class="score-caption" id="resultCaption"></p>
 
         <div class="stage-results" id="stageResults"></div>
@@ -187,8 +189,8 @@
         <div class="result-recap" id="resultRecap" hidden></div>
 
         <div class="action-bar bare">
-          <button class="btn btn-ghost" id="btnRestart">Practicar otra vez</button>
-          <button class="btn btn-accent" id="btnPreview">Ver informe preliminar</button>
+          <button class="btn btn-ghost" id="btnRestart">Repetir</button>
+          <button class="btn btn-accent" id="btnPreview">Ver informe</button>
         </div>
       </section>
     </div>
@@ -198,7 +200,7 @@
   <div class="modal-backdrop" id="previewBackdrop" hidden>
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="previewTitle">
       <div class="modal-head">
-        <h3 id="previewTitle">Vista previa del informe</h3>
+        <h3 id="previewTitle">Informe de la sesión</h3>
         <button class="icon-btn" id="btnCloseModal" aria-label="Cerrar">✕</button>
       </div>
       <div id="previewContent"></div>

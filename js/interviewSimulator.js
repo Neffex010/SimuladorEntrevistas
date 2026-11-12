@@ -294,8 +294,7 @@ export default class InterviewSimulator {
 
     const total = this.queue.length;
     const current = Math.min(this.index + 1, total);
-    this.ivw.progressLabel.textContent =
-      `Pregunta ${current} de ${total} · ${STAGE_LABELS[item.modo] || 'General'}`;
+    this.ivw.progressLabel.textContent = `Pregunta ${current} de ${total}`;
     this.ivw.progressFill.style.width = `${Math.round((current / total) * 100)}%`;
 
     this.ivw.answer.value = '';

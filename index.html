@@ -10,7 +10,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="./css/styles.css" />
 </head>
@@ -38,35 +38,35 @@
 
     <!-- Hero + datos de la sesión -->
     <section class="hero">
-      <div class="container">
-        <span class="tag">Sesión de práctica · sin registro</span>
-        <h1 class="hero-title">Tu próxima entrevista, ensayada.<br />Para cualquier carrera.</h1>
-        <p class="hero-sub">
-          Elige tu área, responde por escrito o dictando y recibe
-          retroalimentación inmediata con un informe de tu desempeño.
-        </p>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="tag">Simulador de entrevistas</span>
+          <h1 class="hero-title">Tu próxima entrevista, <em>ensayada.</em></h1>
+          <p class="hero-sub">
+            Practica para cualquier área, responde por escrito o dictando
+            y recibe feedback inmediato. Sin registro.
+          </p>
 
-        <ul class="hero-points">
-          <li>15 perfiles: salud, educación, negocios, derecho, tecnología y más</li>
-          <li>Feedback con IA en cada respuesta</li>
-          <li>Todo queda en tu navegador</li>
-        </ul>
-      </div>
+          <ul class="hero-facts">
+            <li><strong>15</strong> <span>perfiles</span></li>
+            <li><strong>3</strong> <span>etapas</span></li>
+            <li><strong>0</strong> <span>registro</span></li>
+          </ul>
+        </div>
 
-      <div class="container">
         <form id="formDatos" class="reg-sheet" novalidate>
           <div class="sheet-head">
-            <span class="sheet-title" id="registro">Datos de la sesión</span>
-            <span class="meta">La información se guarda solo en tu navegador.</span>
+            <h2 class="sheet-title" id="registro">Ficha de sesión</h2>
+            <span class="meta">Solo en tu navegador</span>
           </div>
 
           <div class="sheet-grid">
-            <div class="field span-5">
-              <label for="nombre">Nombre(s)</label>
+            <div class="field span-6">
+              <label for="nombre">Nombre</label>
               <input class="input" type="text" id="nombre" name="nombre" required autocomplete="given-name" />
             </div>
 
-            <div class="field span-7">
+            <div class="field span-6">
               <label for="apellidos">Apellidos</label>
               <input class="input" type="text" id="apellidos" name="apellidos" required autocomplete="family-name" />
             </div>
@@ -93,30 +93,24 @@
     <section class="steps">
       <div class="container">
         <div class="section-head">
-          <h2>Así se desarrolla</h2>
-          <p>De la primera respuesta al informe final, todo en unos minutos.</p>
+          <span class="tag">Cómo funciona</span>
+          <h2>Tres pasos. Sin vueltas.</h2>
         </div>
         <ol class="steps-list">
           <li>
             <span class="step-no" aria-hidden="true">01</span>
-            <div>
-              <h3>Elige tu área</h3>
-              <p>Salud, educación, negocios, derecho, diseño, ingeniería, tecnología o el perfil general. Cada área tiene sus propias preguntas.</p>
-            </div>
+            <h3>Elige tu área</h3>
+            <p>15 perfiles en 9 sectores, de salud a tecnología.</p>
           </li>
           <li>
             <span class="step-no" aria-hidden="true">02</span>
-            <div>
-              <h3>Responde a tu ritmo</h3>
-              <p>Escribiendo o dictando. Tú decides cuántos segundos dedicar a cada pregunta.</p>
-            </div>
+            <h3>Responde</h3>
+            <p>Escribe o dicta. Tú marcas el ritmo de cada pregunta.</p>
           </li>
           <li>
             <span class="step-no" aria-hidden="true">03</span>
-            <div>
-              <h3>Recibe feedback y revisa tu informe</h3>
-              <p>Puntuación por etapa, puntos fuertes, áreas de mejora y un consejo concreto en cada respuesta.</p>
-            </div>
+            <h3>Revisa tu feedback</h3>
+            <p>Puntos fuertes, mejoras y un consejo en cada respuesta.</p>
           </li>
         </ol>
       </div>
@@ -126,32 +120,25 @@
     <section class="faq">
       <div class="container">
         <div class="section-head">
-          <h2>Preguntas frecuentes</h2>
+          <span class="tag">Dudas</span>
+          <h2>Antes de empezar</h2>
         </div>
         <div class="faq-grid">
           <details class="faq-item">
             <summary>¿Sirve si mi carrera no es de tecnología?</summary>
-            <p>Sí. Hay perfiles de salud, educación, derecho, negocios, diseño, ingeniería, recursos humanos y una opción general para cualquier otra área.</p>
+            <p>Sí. Hay perfiles de salud, educación, derecho, negocios, diseño, ingeniería, recursos humanos y una opción general.</p>
           </details>
           <details class="faq-item">
             <summary>¿Necesito crear una cuenta?</summary>
-            <p>No. Solo escribes tu nombre y eliges tu área. No hay registro, contraseña ni base de datos central.</p>
+            <p>No. Solo escribes tu nombre y eliges tu área. Sin contraseña ni registro.</p>
           </details>
           <details class="faq-item">
-            <summary>¿Guardan mis respuestas?</summary>
-            <p>Tus datos se guardan solo en tu navegador y las respuestas se usan únicamente para generar el feedback.</p>
-          </details>
-          <details class="faq-item">
-            <summary>¿Cómo se evalúan mis respuestas?</summary>
-            <p>Cada respuesta se analiza y se te devuelven puntos fuertes, consejos de mejora y una calificación del 1 al 5.</p>
-          </details>
-          <details class="faq-item">
-            <summary>¿Puedo repetir la práctica?</summary>
-            <p>Sí. Puedes reiniciar cuando quieras y cambiar de área las veces que necesites.</p>
+            <summary>¿Dónde quedan mis respuestas?</summary>
+            <p>En tu navegador. Solo se envían para generar el feedback de cada pregunta.</p>
           </details>
           <details class="faq-item">
             <summary>¿Funciona en el celular?</summary>
-            <p>Sí. La interfaz se adapta a pantallas pequeñas y puedes responder con el teclado del teléfono.</p>
+            <p>Sí. La interfaz se adapta y puedes responder con el teclado del teléfono.</p>
           </details>
         </div>
       </div>

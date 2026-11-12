@@ -234,9 +234,9 @@ export const SOFT_QUESTIONS = [
 
 // Etiquetas de las etapas de la entrevista.
 export const STAGE_LABELS = {
-  intro: 'Presentación y trayectoria',
-  tecnicas: 'Habilidades técnicas',
-  blandas: 'Habilidades blandas'
+  intro: 'Presentación',
+  tecnicas: 'Área',
+  blandas: 'Blandas'
 };
 
 // Modos de práctica: cuántas preguntas se toman de cada etapa.

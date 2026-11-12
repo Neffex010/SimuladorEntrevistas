@@ -1,5 +1,5 @@
 // ---------- js/landing.js ----------
-import { getRole, groupRolesBySector, questionsForRole } from './config.js';
+import { getRole, groupRolesBySector } from './config.js';
 import { DataManager } from './dataManager.js';
 
 function populateRoles() {
@@ -32,7 +32,7 @@ function updateRoleHint() {
   }
 
   const rol = getRole(select.value);
-  hint.textContent = `${rol.desc} · ${questionsForRole(rol)} preguntas por sesión.`;
+  hint.textContent = `${rol.desc} · 6 o 12 preguntas por sesión.`;
 }
 
 function validate(form) {

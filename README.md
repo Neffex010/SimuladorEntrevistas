@@ -44,7 +44,7 @@ datos: tus datos viven solo en tu navegador.
 │   ├── interviewSimulator.js  # Orquestador principal del flujo
 │   ├── timer.js               # Cronómetro por pregunta
 │   ├── speechController.js    # Reconocimiento de voz (dictado)
-│   ├── previewModal.js        # Vista previa del informe (segura ante XSS)
+│   ├── previewModal.js        # Informe en modal (seguro ante XSS)
 │   └── theme.js               # Tema claro/oscuro
 ├── netlify/
 │   └── functions/
@@ -162,5 +162,5 @@ Códigos de error:
 - No hay registro central: los datos se guardan en `localStorage` del
   navegador y nunca se envían fuera (la única llamada externa es el análisis
   de la respuesta).
-- Diseño propio bajo restricciones estrictas: 6 tokens de color, 3 tamaños de
-  fuente, una sola sombra, sin gradientes ni animaciones de entrada.
+- Diseño brutalista propio: 6 tokens de color, escala tipográfica compacta,
+  una sola sombra dura, sin gradientes ni animaciones de entrada.
